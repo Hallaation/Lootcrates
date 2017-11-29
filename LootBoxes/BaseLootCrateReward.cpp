@@ -22,3 +22,8 @@ Rarity BaseLootCrateReward::GetRarity()
 {
 	return mRarity;
 }
+
+std::string BaseLootCrateReward::GetReward()
+{
+	return mReward;
+}

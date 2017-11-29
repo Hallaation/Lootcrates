@@ -1,7 +1,7 @@
 #include "BaseLootCrate.h"
-
+#include "RewardList.h"
 #include <random>
-
+#include <iostream>
 BaseLootCrate::BaseLootCrate()
 {
 }
@@ -10,7 +10,7 @@ BaseLootCrate::BaseLootCrate(Rarity aRarity, float aPrice, int aRewardOutput)
 {
 	mCrateRarity = aRarity;
 	mPrice = aPrice;
-	miRewardOutputCount = aRewardOutput;
+	rewardOutputCount = aRewardOutput;
 }
 
 
@@ -18,23 +18,55 @@ BaseLootCrate::~BaseLootCrate()
 {
 }
 
-RewardVector BaseLootCrate::RollRewards()
+void BaseLootCrate::SetRewardList(RewardList* aRewardList)
+{
+	mRewardList = aRewardList;
+}
+
+float BaseLootCrate::GetPrice()
+{
+	return mPrice;
+}
+
+
+RewardVector BaseLootCrate::RollRewards(float afskewAmount, bool abGuaranteeLegendary)
 {
 	RewardVector temp;
 	//seed with a random value
-	for (int i = 0; i < miRewardOutputCount; i++)
+	for (int i = 0; i < rewardOutputCount; i++)
 	{
+		int randomNumber = rand() % 100 + afskewAmount;
 		//check for 60%
-		  //obtain common
-		//check for 10%
-		  //obtain nothing
-		//check for 5%
-		  //obtain rare
-		//check for 3%
-		  //obtain legendary
-		//check for 1%
-		  //obtain mythical
+		if (abGuaranteeLegendary)
+		{
+			temp.push_back(mRewardList->GetReward(LEGENDARY));
+		}
+		else if (randomNumber <= 1)
+		{
+			temp.push_back(mRewardList->GetReward(MYTHICAL));
+		}
+		else if (randomNumber <= 3 )
+		{
+			temp.push_back(mRewardList->GetReward(LEGENDARY));
+		}
+		else if (randomNumber <= 5)
+		{
+			temp.push_back(mRewardList->GetReward(EPIC));
+		}
+		else if (randomNumber <= 10)
+		{
+			
+		}
+		else if (randomNumber <= 20)
+		{
+			temp.push_back(mRewardList->GetReward(RARE));
+		}
+		else if (randomNumber <= 60 )
+		{
+			temp.push_back(mRewardList->GetReward(COMMON));
+		}
 	}
+
 	/*
 	Rarity Distribution:
 	Nothing   : 10%
@@ -45,5 +77,5 @@ RewardVector BaseLootCrate::RollRewards()
 	Mythical  : 1%
 	*/
 
-	return RewardVector();
+	return temp;
 }

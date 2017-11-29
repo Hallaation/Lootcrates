@@ -5,8 +5,9 @@
 
 #include <stdio.h>
 #include <vector>
-#include <random>
 
+
+class RewardList;
 #define RewardVector std::vector<BaseLootCrateReward>
 class BaseLootCrate
 {
@@ -23,12 +24,15 @@ public:
 	BaseLootCrate();
 	BaseLootCrate(Rarity aRarity, float aPrice, int aRewardOutput);
 	~BaseLootCrate();
-
+	
+	void SetRewardList(RewardList* aRewardList);
+	float GetPrice();
 	//Adds a reward to the vector 
-	void AddReward(BaseLootCrateReward aReward);
+	//void AddReward(BaseLootCrateReward aReward);
+	RewardVector RollRewards(float afSkewAmount = 20, bool abGuaranteeLegendary = false);
 
-	RewardVector RollRewards();
 protected:
+	RewardList *mRewardList;
 	Rarity mCrateRarity;
 	float mPrice;
 	int rewardOutputCount;

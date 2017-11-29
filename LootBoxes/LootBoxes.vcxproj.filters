@@ -39,6 +39,9 @@
     <ClInclude Include="Rarity.h">
       <Filter>Header Files\Classes</Filter>
     </ClInclude>
+    <ClInclude Include="RewardList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -52,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="BaseLootCrateReward.cpp">
       <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="RewardList.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

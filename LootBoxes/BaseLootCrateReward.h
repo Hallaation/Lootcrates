@@ -11,7 +11,7 @@ public:
 	~BaseLootCrateReward();
 
 	Rarity GetRarity();
-
+	std::string GetReward();
 protected:
 	Rarity mRarity;
 	std::string mReward;
