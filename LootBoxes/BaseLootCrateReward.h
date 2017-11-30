@@ -15,5 +15,6 @@ public:
 protected:
 	Rarity mRarity;
 	std::string mReward;
+	
 };
 
